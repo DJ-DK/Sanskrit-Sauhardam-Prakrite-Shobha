@@ -1,7 +1,7 @@
 const form = document.querySelector( ".signup form" );
 let error = document.getElementById( "error" );
 let name_name = document.getElementById( "name" );
-let division = document.getElementById( "division" );
+let roll = document.getElementById( "roll" );
 let UserNameVerification = localStorage.getItem( "User_Name" );
 
 // Security at startup script
@@ -12,8 +12,8 @@ form.onsubmit = (e)=> {
     document.getElementById( "wrapper" ).style.display = "none";
     let name_val_first = name_name.value;
     let name_val = name_val_first.trim();
-    let division_val = division.value;
-    if ( division_val == "A" || division_val == "a" || division_val == "B" || division_val == "b" || division_val == "C" || division_val == "c" || division_val == "D" || division_val == "d" ) {
+    let roll_val = roll.value;
+    if (roll_val > 0 && roll_val < 45) {
         if ( !( ( name_val.includes( "." ) ) || name_val.includes( "#" ) ) || name_val.includes( "$" ) || name_val.includes( "(" ) || name_val.includes( ")" ) || name_val.includes( "[" ) || name_val.includes( "]" ) ) {
             //Checking password is same from others or not
             let database_ref = firebase.database().ref(); //different because ref added means refernce
@@ -31,12 +31,12 @@ form.onsubmit = (e)=> {
                         document.getElementById( "loader" ).style.display = "none";
                         document.getElementById( "wrapper" ).style.display = "block";
                         document.getElementById( "name" ).value = "";
-                        document.getElementById( "division" ).value = "";
+                        document.getElementById( "roll" ).value = "";
                     } else {
                         const database = firebase.database();
                         let data = {
                             User: name_val,
-                            Division: division_val,
+                            Roll: roll_val,
                             Played: "No"
                         };
                         var ref = database.ref( "Users_Data/" + name_val );
@@ -82,7 +82,7 @@ form.onsubmit = (e)=> {
         }
     } else {
         document.getElementById( "error" ).style.display = "block";
-        error.innerHTML = "Please type a valid division";
+        error.innerHTML = "Please type a valid Sanskrit Roll no.";
         document.getElementById( "loader" ).style.display = "none";
         document.getElementById( "wrapper" ).style.display = "block";
         setTimeout( () => {

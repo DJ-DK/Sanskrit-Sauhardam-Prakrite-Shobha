@@ -1,1 +1,1 @@
-# सौहार्दं प्रकृते: शोभा Quiz
+# Sanskrit-Sauhardam Prakruti Shobha
